@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Contact Message | Admin{% endblock %}
+{% block content %}
+<section class="section">
+    <div class="container narrow-container"><a class="back-link" href="{{ url_for('admin.dashboard') }}">← Admin
+        dashboard</a>
+        <article class="prose-card"><span class="eyebrow">Private contact message</span>
+            <h1>{{ message.subject }}</h1>
+            <dl class="about-meta">
+                <div>
+                    <dt>From</dt>
+                    <dd>{{ message.name }}</dd>
+                </div>
+                <div>
+                    <dt>Email</dt>
+                    <dd><a href="mailto:{{ message.email }}">{{ message.email }}</a></dd>
+                </div>
+                <div>
+                    <dt>Received</dt>
+                    <dd>{{ message.created_at.strftime('%d %b %Y %H:%M') }}</dd>
+                </div>
+                <div>
+                    <dt>Status</dt>
+                    <dd>{{ message.status }}</dd>
+                </div>
+            </dl>
+            <h2>Message</h2>
+            <p class="preserve-lines">{{ message.message }}</p>
+            <form method="post" action="{{ url_for('admin.message_delete', message_id=message.id) }}"><input
+                    type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-ghost danger" type="submit" data-confirm="Delete this message?">Delete message
+                </button>
+            </form>
+        </article>
+    </div>
+</section>{% endblock %}

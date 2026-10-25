@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Contact | {{ site.name }}{% endblock %}
+{% block content %}
+<section class="page-hero section compact-section">
+    <div class="container"><span class="eyebrow">Contact</span>
+        <h1>Let's connect.</h1>
+        <p>Have an opportunity or project in mind? I'd be happy to connect.</p></div>
+</section>
+<section class="section">
+    <div class="container contact-grid">
+        <aside class="contact-details"><h2>Contact information</h2>
+            <div class="contact-list">
+                <div><span>Email</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></div>
+                <div><span>Phone</span><a href="tel:{{ site.phone }}">{{ site.phone }}</a></div>
+                <div><span>Location</span><strong>{{ site.location }}</strong></div>
+                <div><span>LinkedIn</span><a href="{{ site.linkedin_url }}" target="_blank" rel="noopener noreferrer">Visit
+                    profile</a></div>
+                <div><span>GitHub</span><a href="{{ site.github_url }}" target="_blank" rel="noopener noreferrer">View
+                    repositories</a></div>
+            </div>
+            <p></p></aside>
+        <div class="form-card"><h2>Send Message</h2>
+            <form method="post" novalidate>{{ form.hidden_tag() }}
+                <div class="honeypot" aria-hidden="true">{{ form.website.label }}{{ form.website(tabindex='-1',
+                    autocomplete='off') }}
+                </div>
+                <div class="form-row">
+                    <div class="form-group">{{ form.name.label }}{{ form.name(class='form-control', autocomplete='name')
+                        }}{% for error in form.name.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    </div>
+                    <div class="form-group">{{ form.email.label }}{{ form.email(class='form-control',
+                        autocomplete='email') }}{% for error in form.email.errors %}<span class="field-error">{{ error }}</span>{%
+                        endfor %}
+                    </div>
+                </div>
+                <div class="form-group">{{ form.subject.label }}{{ form.subject(class='form-control') }}{% for error in
+                    form.subject.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+                <div class="form-group">{{ form.message.label }}{{ form.message(class='form-control', rows='7') }}{% for
+                    error in form.message.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+                {{ form.submit(class='btn btn-primary') }}
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

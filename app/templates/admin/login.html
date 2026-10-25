@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Admin Sign In | {{ site.name }}{% endblock %}
+{% block content %}
+<section class="section compact-section">
+    <div class="container narrow-container">
+        <div class="form-card"><span class="eyebrow">Admin</span>
+            <h1>Portfolio management</h1>{% if admin_disabled %}
+            <div class="notice"><strong>Admin access is disabled.</strong>
+                <p>Generate a password hash with <code>python generate_admin_hash.py</code>, then set <code>ADMIN_PASSWORD_HASH</code>
+                    in your environment. No default production password is provided.</p></div>
+            {% else %}
+            <form method="post" novalidate>{{ form.hidden_tag() }}
+                <div class="form-group">{{ form.password.label }}{{ form.password(class='form-control',
+                    autocomplete='current-password') }}{% for error in form.password.errors %}<span class="field-error">{{ error }}</span>{%
+                    endfor %}
+                </div>
+                {{ form.submit(class='btn btn-primary') }}
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

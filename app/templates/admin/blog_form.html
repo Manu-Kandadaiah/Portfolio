@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} | Admin{% endblock %}
+{% block content %}
+<section class="section">
+    <div class="container narrow-container"><a class="back-link" href="{{ url_for('admin.dashboard') }}">← Admin
+        dashboard</a>
+        <div class="form-card"><span class="eyebrow">Admin</span>
+            <h1>{{ heading }}</h1>
+            <form method="post" novalidate>{{ form.hidden_tag() }}{% for field in [form.title, form.slug, form.summary,
+                form.category, form.external_url] %}
+                <div class="form-group">{{ field.label }}{% if field.type == 'TextAreaField' %}{{
+                    field(class='form-control', rows='5') }}{% else %}{{ field(class='form-control') }}{% endif %}{% for
+                    error in field.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                </div>
+                {% endfor %}
+                <div class="checkbox-row">{{ form.published() }} {{ form.published.label }}</div>
+                {{ form.submit(class='btn btn-primary') }}
+            </form>
+        </div>
+    </div>
+</section>{% endblock %}

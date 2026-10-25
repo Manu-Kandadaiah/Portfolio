@@ -1,0 +1,56 @@
+flask_developer_portfolio/
+├── app.py
+├── wsgi.py
+├── config.py
+├── init_db.py
+├── seed.py
+├── generate_admin_hash.py
+├── requirements.txt
+├── requirements-dev.txt
+├── README.md
+├── .env.example
+├── .gitignore
+├── instance/
+│   └── .gitkeep
+├── tests/
+│   └── test_app.py
+└── app/
+    ├── __init__.py
+    ├── content.py
+    ├── extensions.py
+    ├── forms.py
+    ├── models.py
+    ├── utils.py
+    ├── routes/
+    │   ├── __init__.py
+    │   ├── main.py
+    │   ├── projects.py
+    │   ├── contact.py
+    │   └── admin.py
+    ├── templates/
+    │   ├── base.html
+    │   ├── index.html
+    │   ├── projects.html
+    │   ├── project_detail.html
+    │   ├── resume.html
+    │   ├── contact.html
+    │   ├── blog.html
+    │   ├── 404.html
+    │   ├── 500.html
+    │   └── admin/
+    │       ├── login.html
+    │       ├── dashboard.html
+    │       ├── project_form.html
+    │       ├── blog_form.html
+    │       └── message_detail.html
+    └── static/
+        ├── css/style.css
+        ├── js/main.js
+        ├── files/
+        │   └── README.txt
+        └── images/
+            ├── profile-placeholder.svg
+            └── projects/
+                ├── python/placeholder-project.svg
+                ├── data-analytics/placeholder-project.svg
+                └── ai-ml/placeholder-project.svg

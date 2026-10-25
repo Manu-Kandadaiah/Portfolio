@@ -1,0 +1,54 @@
+{% extends "base.html" %}{% block title %}Projects | {{ site.name }}{% endblock %}{% block content %}
+<section class="page-hero section compact-section">
+    <div class="container"><span class="eyebrow">Selected work</span>
+        <h1>Projects & case studies</h1>
+        <div class="button-row"><a class="btn btn-primary" href="{{ url_for('main.resume') }}">View my resume</a>{% if
+            resume_available %}<a class="btn btn-secondary" href="{{ url_for('static',filename=resume_static_path) }}"
+                                  download>Download PDF</a>{% endif %}
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="filter-bar" role="group" aria-label="Project categories">
+            <button class="filter-btn {{ 'active' if selected_category=='all' else '' }}" data-filter="all">All
+                projects
+            </button>
+            {% for key in ['python','data-analytics','ai-ml'] %}
+            <button class="filter-btn {{ 'active' if selected_category==key else '' }}" data-filter="{{ key }}">{{
+                category_labels[key] }} ({{ category_counts[key] }})
+            </button>
+            {% endfor %}
+        </div>
+        <div class="project-grid" id="project-grid">{% for project in projects %}
+            <article class="project-card project-filter-item" data-category="{{ project.category }}" {% if
+                     selected_category!='all' and project.category!=selected_category %}hidden{% endif %}>
+                <div class="project-image-wrap">{% if project.main_image %}<img
+                        src="{{ url_for('static',filename=project.main_image) }}"
+                        alt="{{ project.title }} conceptual illustration or screenshot" loading="lazy">{% else %}
+                    <div class="image-placeholder">Screenshot not supplied</div>
+                    {% endif %}
+                </div>
+                <div class="project-card-body">
+                    <div class="project-meta"><span class="badge">{{ category_labels[project.category] }}</span><span
+                            class="status">{{ project.status }}</span></div>
+                    <h2 class="card-title">{{ project.title }}</h2>
+                    <p>{{ project.short_description }}</p>
+                    <div class="tag-list compact">{% for technology in project.technology_list[:5] %}<span class="tag">{{ technology }}</span>{%
+                        endfor %}
+                    </div>
+                    <div class="card-actions"><a class="btn btn-small btn-primary"
+                                                 href="{{ url_for('projects.detail',slug=project.slug) }}">Explore case
+                        study →</a>{% if project.github_url %}<a class="btn btn-small btn-ghost"
+                                                                 href="{{ project.github_url }}"
+                                                                 rel="noopener noreferrer" target="_blank">GitHub</a>{%
+                        endif %}{% if project.live_url %}<a class="btn btn-small btn-ghost"
+                                                            href="{{ project.live_url }}" rel="noopener noreferrer"
+                                                            target="_blank">Live demo</a>{% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>{% endblock %}
